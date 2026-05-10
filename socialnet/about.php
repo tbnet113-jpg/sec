@@ -9,7 +9,17 @@ require_login();
 render_header('About');
 render_menubar();
 ?>
-<h1>About Page</h1>
-<p><strong>Student name:</strong> Your Name</p>
-<p><strong>Student number:</strong> Your Student Number</p>
+<main class="sn-main">
+    <div class="sn-card">
+        <h1 class="sn-h1">About</h1>
+        <p class="sn-lead">Course submission details.</p>
+
+        <dl class="sn-dl" style="margin-top:8px">
+            <dt>Student name</dt>
+            <dd>NguyenNhatMinh</dd>
+            <dt>Student number</dt>
+            <dd>1701787</dd>
+        </dl>
+    </div>
+</main>
 <?php render_footer(); ?>

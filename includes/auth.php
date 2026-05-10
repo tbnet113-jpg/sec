@@ -24,11 +24,15 @@ function current_user(): ?array
         return null;
     }
 
-    $stmt = db()->prepare('SELECT id, username, fullname, description FROM account WHERE id = :id LIMIT 1');
-    $stmt->execute(['id' => (int) $_SESSION['account_id']]);
-    $user = $stmt->fetch();
+    try {
+        $stmt = db()->prepare('SELECT id, username, fullname, description FROM account WHERE id = :id LIMIT 1');
+        $stmt->execute(['id' => (int) $_SESSION['account_id']]);
+        $user = $stmt->fetch();
 
-    return $user ?: null;
+        return $user ?: null;
+    } catch (PDOException $e) {
+        return null;
+    }
 }
 
 function require_login(): array

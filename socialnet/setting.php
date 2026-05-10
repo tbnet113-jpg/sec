@@ -18,16 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $success = 'Profile content updated successfully.';
 }
 
-render_header('Setting');
+render_header('Settings');
 render_menubar();
 ?>
-<h1>Setting Page</h1>
-<p>Update your profile page content below:</p>
-<?php if ($success !== ''): ?><p class="success"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p><?php endif; ?>
+<main class="sn-main">
+    <div class="sn-card">
+        <h1 class="sn-h1">Settings</h1>
+        <p class="sn-lead">This text appears on your public profile page.</p>
+        <?php if ($success !== ''): ?><p class="sn-alert sn-alert--success"><?= htmlspecialchars($success, ENT_QUOTES, 'UTF-8') ?></p><?php endif; ?>
 
-<form method="post" action="/socialnet/setting.php">
-    <label for="description">Profile Page Content</label>
-    <textarea id="description" name="description" rows="8"><?= htmlspecialchars((string) ($user['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
-    <button type="submit">Save</button>
-</form>
+        <form class="sn-form" method="post" action="/socialnet/setting.php">
+            <label for="description">Profile page content</label>
+            <textarea id="description" name="description" rows="8" placeholder="Tell others about yourself…"><?= htmlspecialchars((string) ($user['description'] ?? ''), ENT_QUOTES, 'UTF-8') ?></textarea>
+            <button class="sn-btn" type="submit">Save changes</button>
+        </form>
+    </div>
+</main>
 <?php render_footer(); ?>

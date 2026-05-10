@@ -32,18 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-render_header('Sign In');
+render_header('Sign in', 'sn-body--auth');
 ?>
-<h1>Sign In</h1>
-<?php if ($error !== ''): ?><p class="error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p><?php endif; ?>
+<a class="sn-brand" href="/socialnet/signin.php"><span class="sn-brand-mark">S</span><span><span class="sn-brand-text">SocialNet</span><span class="sn-brand-sub">Welcome back</span></span></a>
+<main class="sn-main sn-main--narrow">
+    <div class="sn-card">
+        <h1 class="sn-h1">Sign in</h1>
+        <p class="sn-lead">Use the account created by the administrator.</p>
+        <?php if ($error !== ''): ?><p class="sn-alert sn-alert--error"><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></p><?php endif; ?>
 
-<form method="post" action="/socialnet/signin.php">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" required>
+        <form class="sn-form" method="post" action="/socialnet/signin.php">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" required autocomplete="username">
 
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" required>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required autocomplete="current-password">
 
-    <button type="submit">Sign In</button>
-</form>
+            <button class="sn-btn" type="submit">Sign in</button>
+        </form>
+    </div>
+</main>
 <?php render_footer(); ?>
