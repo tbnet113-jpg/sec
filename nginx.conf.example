@@ -1,0 +1,23 @@
+# Example Nginx server block (Linux). Adjust paths and php-fpm socket.
+#
+# Place project under e.g. /var/www/socialnet so URLs match:
+#   /admin/newuser.php  ->  /var/www/socialnet/admin/newuser.php
+#   /socialnet/*.php    ->  /var/www/socialnet/socialnet/*.php
+
+server {
+    listen 80;
+    server_name localhost;
+    root /var/www/socialnet;
+    index index.php;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
